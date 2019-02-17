@@ -1,4 +1,4 @@
-package com.example.globe.data
+package com.example.globe.data.network
 
 import com.example.globe.data.network.response.NewsResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -17,17 +17,17 @@ const val BASE_URL = "https://newsapi.org/v2/";
 interface Api {
 
     @GET("top-headlines")
-    fun fetchTopNews(@Query("country") country: String): Deferred<Response<NewsResponse>>
+    fun fetchTopNews(@Query("country") country: String): Deferred<NewsResponse>
 
     @GET("everything")
     fun fetchEverything(
         @Query("q") query: String,
         @Query("from") from: String,
         @Query("to") to: String
-    ):  Deferred<Response<NewsResponse>>
+    ):  Deferred<NewsResponse>
 
     companion object {
-        operator fun invoke(): Api {
+        operator fun invoke( connectivityInterceptor: ConnectivityInterceptor): Api {
             val requestInterceptor = Interceptor { chain ->
 
                 val url = chain.request()
@@ -45,6 +45,7 @@ interface Api {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
