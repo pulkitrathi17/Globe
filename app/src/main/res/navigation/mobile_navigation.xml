@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation"
+            app:startDestination="@id/everythingFragment">
+
+    <fragment android:id="@+id/everythingFragment" android:name="com.example.globe.ui.everything.EverythingFragment"
+              android:label="everything_fragment" tools:layout="@layout/everything_fragment"/>
+    <fragment android:id="@+id/headlineFragment" android:name="com.example.globe.ui.headlines.HeadlineFragment"
+              android:label="headline_fragment" tools:layout="@layout/headline_fragment"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.example.globe.ui.settings.SettingsFragment"
+              android:label="settings_fragment" tools:layout="@layout/settings_fragment"/>
+</navigation>
