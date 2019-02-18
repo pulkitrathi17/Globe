@@ -2,17 +2,17 @@ package com.example.globe.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.globe.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 
-class ConnectivityInterceptorImpl(context: Context) : ConnectivityInterceptor {
+class ConnectivityInterceptorImpl(context: Context) : Interceptor {
 
     private val appContext = context.applicationContext
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isOnline())
-            throw NoConnectivityException()
+            throw IOException()
         return chain.proceed(chain.request())
     }
 

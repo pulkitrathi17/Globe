@@ -1,7 +1,35 @@
 package com.example.globe
 
-object Globe {
+import android.app.Application
+import com.example.globe.data.db.NewsDatabase
+import com.example.globe.data.network.Api
+import com.example.globe.data.network.ConnectivityInterceptorImpl
+import com.example.globe.data.network.NewsDataSource
+import com.example.globe.data.network.NewsDataSourceImpl
+import com.example.globe.data.repository.NewsRepositoryImpl
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.androidXModule
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 
+object GlobeApplication : Application(), KodeinAware {
+    override val kodein = Kodein.lazy {
+        import(androidXModule(this@GlobeApplication))
+
+        bind() from singleton { NewsDatabase(instance()) }
+        bind() from singleton { instance<NewsDatabase>().newsDao() }
+        bind<ConnectivityInterceptorImpl>() with singleton { ConnectivityInterceptorImpl(instance()) }
+        bind() from singleton { Api(instance()) }
+        bind<NewsDataSource>() with singleton { NewsDataSourceImpl(instance()) }
+        bind<NewsRepositoryImpl>() with singleton { NewsRepositoryImpl(instance(), instance()) }
+
+
+        //bind() from singleton { NewsRepositoryImpl(instance(), instance()) }
+        //bind() from singleton { ConnectivityInterceptorImpl(instance()) }
+
+    }
 
     val country_list = mapOf<String, String>(
         "Argentina" to "ar",
@@ -58,7 +86,7 @@ object Globe {
         "United Kingdom" to "gb",
         "United States" to "us",
         "venezuela" to "ve"
-        )
+    )
 
     val language_list = mapOf<String, String>(
         "Arabic" to "ar",
@@ -73,6 +101,5 @@ object Globe {
         "Russian" to "ru",
         "Chinese" to "zh"
     )
-
 }
 

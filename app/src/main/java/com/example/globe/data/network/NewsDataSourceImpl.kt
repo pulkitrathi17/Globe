@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.globe.data.network.response.NewsResponse
-import com.example.globe.internal.NoConnectivityException
+import java.io.IOException
 
 class NewsDataSourceImpl(private val api:Api) : NewsDataSource {
 
@@ -20,7 +20,7 @@ class NewsDataSourceImpl(private val api:Api) : NewsDataSource {
                 .await()
             _downloadedNews.postValue(fetchedNews)
         }
-        catch (e: NoConnectivityException) {
+        catch (e: IOException) {
             Log.e("Connectivity", "No internet connection.", e)
         }
     }

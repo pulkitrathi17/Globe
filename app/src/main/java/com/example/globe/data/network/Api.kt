@@ -12,7 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 const val API_KEY ="70411829ddc74c02a560e76cca559238"
-const val BASE_URL = "https://newsapi.org/v2/";
+const val BASE_URL = "https://newsapi.org/v2/"
 
 interface Api {
 
@@ -27,7 +27,7 @@ interface Api {
     ):  Deferred<NewsResponse>
 
     companion object {
-        operator fun invoke( connectivityInterceptor: ConnectivityInterceptor): Api {
+        operator fun invoke( connectivityInterceptor: ConnectivityInterceptorImpl): Api {
             val requestInterceptor = Interceptor { chain ->
 
                 val url = chain.request()

@@ -15,6 +15,6 @@ interface NewsDao {
     fun upsertArticles(articles: List<Article>)
 
     @Query("SELECT * FROM article ORDER BY publishedAt DESC")
-    fun getArticles(): LiveData<Article>
+    fun getArticles(): LiveData<List<Article>>
 
 }
