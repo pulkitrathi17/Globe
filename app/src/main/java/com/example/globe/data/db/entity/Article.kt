@@ -16,7 +16,8 @@ class Article (
 
     @PrimaryKey
     @SerializedName("title")
-    var title: String? = null,
+    var title: String ,
+
     @SerializedName("description")
     var description: String? = null,
     @SerializedName("url")

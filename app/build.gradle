@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -28,7 +30,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -36,13 +38,13 @@ dependencies {
 
 
     // Navigation
-    implementation "android.arch.navigation:navigation-fragment:1.0.0-beta01"
-    implementation "android.arch.navigation:navigation-ui:1.0.0-beta01"
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-beta01"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-beta01"
+    implementation "android.arch.navigation:navigation-fragment:1.0.0-beta02"
+    implementation "android.arch.navigation:navigation-ui:1.0.0-beta02"
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-beta02"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-beta02"
 
     //animation
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-beta01"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-beta02"
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -62,6 +64,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //Architecture Components
+    kapt "androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02"
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02"
 
     // Paging
@@ -75,4 +78,7 @@ dependencies {
     // Kodein
     implementation "org.kodein.di:kodein-di-generic-jvm:5.2.0"
     implementation "org.kodein.di:kodein-di-framework-android-x:5.2.0"
+
+    // New Material Design
+    implementation "com.google.android.material:material:1.0.0"
 }
