@@ -16,7 +16,7 @@ import org.kodein.di.generic.instance
 
 class HeadlineFragment : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
-    val viewModelFactory : HeadlineViewModelFactory by instance()
+    private val viewModelFactory : HeadlineViewModelFactory by instance()
 
     private lateinit var viewModel: HeadlineViewModel
 
@@ -32,12 +32,11 @@ class HeadlineFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(HeadlineViewModel::class.java)
 
-        buidUI()
-
+        buildUI()
 
     }
 
-    private fun buidUI() = launch {
+    private fun buildUI() = launch {
         var newsResponse = viewModel.news.await()
         newsResponse.observe(this@HeadlineFragment, Observer {
             if(it.isEmpty())

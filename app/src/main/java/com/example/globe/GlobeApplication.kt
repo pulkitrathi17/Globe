@@ -6,6 +6,7 @@ import com.example.globe.data.network.Api
 import com.example.globe.data.network.ConnectivityInterceptorImpl
 import com.example.globe.data.network.NewsDataSource
 import com.example.globe.data.network.NewsDataSourceImpl
+import com.example.globe.data.provider.SettingPreferences
 import com.example.globe.data.repository.NewsRepositoryImpl
 import com.example.globe.ui.headlines.HeadlineViewModelFactory
 import org.kodein.di.Kodein
@@ -106,5 +107,10 @@ class GlobeApplication : Application(), KodeinAware {
         "Russian" to "ru",
         "Chinese" to "zh"
     )
+
+    override fun onCreate() {
+        super.onCreate()
+        SettingPreferences.init(this)
+    }
 }
 

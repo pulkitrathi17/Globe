@@ -7,6 +7,7 @@ import com.example.globe.data.db.entity.News
 import com.example.globe.data.network.NewsDataSource
 import com.example.globe.data.network.NewsDataSourceImpl
 import com.example.globe.data.network.response.NewsResponse
+import com.example.globe.data.provider.SettingPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,7 +39,7 @@ class NewsRepositoryImpl(
     }
 
     private suspend fun fetchNews() {
-        newsDataSource.fetchTopNews("us")
+        newsDataSource.fetchTopNews()
     }
 
     private fun isFetchNewsNeeded(): Boolean {

@@ -12,7 +12,7 @@
 
         <ListPreference
                 android:key="LOCATION"
-                android:title="Country"
+                android:title="Location"
                 android:summary="%s"
                 android:defaultValue="in"
                 android:entries="@array/countryEntries"

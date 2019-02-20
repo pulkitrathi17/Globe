@@ -7,6 +7,5 @@ interface NewsDataSource {
     val downloadedNews: LiveData<NewsResponse>
 
     suspend fun fetchTopNews(
-        country: String
     )
 }

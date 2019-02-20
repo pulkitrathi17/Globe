@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.globe.data.network.response.NewsResponse
+import com.example.globe.data.provider.SettingPreferences
 import java.io.IOException
 
 class NewsDataSourceImpl(private val api:Api) : NewsDataSource {
@@ -13,10 +14,10 @@ class NewsDataSourceImpl(private val api:Api) : NewsDataSource {
     override val downloadedNews: LiveData<NewsResponse>
         get() = _downloadedNews
 
-    override suspend fun fetchTopNews(country: String) {
+    override suspend fun fetchTopNews() {
         try {
             val fetchedNews = api
-                .fetchTopNews(country)
+                .fetchTopNews(SettingPreferences.getLocation())
                 .await()
             _downloadedNews.postValue(fetchedNews)
         }

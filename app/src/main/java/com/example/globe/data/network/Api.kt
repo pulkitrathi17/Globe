@@ -23,7 +23,8 @@ interface Api {
     fun fetchEverything(
         @Query("q") query: String,
         @Query("from") from: String,
-        @Query("to") to: String
+        @Query("to") to: String,
+        @Query("language") language: String
     ):  Deferred<NewsResponse>
 
     companion object {
