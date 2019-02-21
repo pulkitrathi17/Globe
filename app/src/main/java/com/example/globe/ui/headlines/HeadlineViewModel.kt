@@ -1,15 +1,15 @@
 package com.example.globe.ui.headlines
 
 import androidx.lifecycle.ViewModel
-import com.example.globe.data.repository.NewsRepositoryImpl
+import com.example.globe.data.repository.NewsRepository
 import kotlinx.coroutines.*
 
 class HeadlineViewModel(
-    private val newsRepositoryImpl: NewsRepositoryImpl
+    private val newsRepository: NewsRepository
 ) : ViewModel() {
-    val news by lazy {
+    val topNews by lazy {
         GlobalScope.async(start = CoroutineStart.LAZY) {
-            newsRepositoryImpl.getNews()
+            newsRepository.getTopNews()
         }
     }
 }

@@ -11,10 +11,13 @@ import com.example.globe.data.db.entity.Article
 @Dao
 interface NewsDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE )
     fun upsertArticles(articles: List<Article>)
 
-    @Query("SELECT * FROM article ORDER BY publishedAt DESC")
+    @Query("SELECT * FROM article ORDER BY publishedAt DESC ")
     fun getArticles(): LiveData<List<Article>>
+
+    @Query("delete from article where type = :type")
+    fun clearOldNews(type: String)
 
 }

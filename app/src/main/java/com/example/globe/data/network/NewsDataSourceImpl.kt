@@ -7,21 +7,20 @@ import com.example.globe.data.network.response.NewsResponse
 import com.example.globe.data.provider.SettingPreferences
 import java.io.IOException
 
-class NewsDataSourceImpl(private val api:Api) : NewsDataSource {
+class NewsDataSourceImpl(private val api: Api) : NewsDataSource {
 
-    private val _downloadedNews = MutableLiveData<NewsResponse>()
+    private val _downloadedTopNews = MutableLiveData<NewsResponse>()
 
-    override val downloadedNews: LiveData<NewsResponse>
-        get() = _downloadedNews
+    override val downloadedTopNews: LiveData<NewsResponse>
+        get() = _downloadedTopNews
 
     override suspend fun fetchTopNews() {
         try {
             val fetchedNews = api
                 .fetchTopNews(SettingPreferences.getLocation())
                 .await()
-            _downloadedNews.postValue(fetchedNews)
-        }
-        catch (e: IOException) {
+            _downloadedTopNews.postValue(fetchedNews)
+        } catch (e: IOException) {
             Log.e("Connectivity", "No internet connection.", e)
         }
     }

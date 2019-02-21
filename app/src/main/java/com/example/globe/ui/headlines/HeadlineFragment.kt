@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 
 import com.example.globe.R
+import com.example.globe.data.db.entity.Article
 import com.example.globe.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.headline_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -32,18 +35,24 @@ class HeadlineFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(HeadlineViewModel::class.java)
 
+
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Headlines"
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = null
+
         buildUI()
 
     }
 
     private fun buildUI() = launch {
-        var newsResponse = viewModel.news.await()
+        val newsResponse = viewModel.topNews.await()
         newsResponse.observe(this@HeadlineFragment, Observer {
             if(it.isEmpty())
                 return@Observer
 
-            print(it[3].author)
+            group_loading.visibility = View.GONE
         })
     }
+
+
 
 }

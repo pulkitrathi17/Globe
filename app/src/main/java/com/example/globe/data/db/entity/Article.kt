@@ -3,11 +3,10 @@ package com.example.globe.data.db.entity
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.globe.data.db.entity.Source
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "article")
-class Article (
+class Article(
 
     @Embedded
     var source: Source? = null,
@@ -16,7 +15,7 @@ class Article (
 
     @PrimaryKey
     @SerializedName("title")
-    var title: String ,
+    var title: String,
 
     @SerializedName("description")
     var description: String? = null,
@@ -27,6 +26,8 @@ class Article (
     @SerializedName("publishedAt")
     var publishedAt: String? = null,
     @SerializedName("content")
-    var content: String? = null
+    var content: String? = null,
+
+    var type: String? = null
 
 )
