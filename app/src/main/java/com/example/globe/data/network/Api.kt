@@ -22,8 +22,6 @@ interface Api {
     @GET("everything")
     fun fetchEverything(
         @Query("q") query: String,
-        @Query("from") from: String,
-        @Query("to") to: String,
         @Query("language") language: String
     ):  Deferred<NewsResponse>
 

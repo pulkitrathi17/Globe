@@ -30,13 +30,15 @@ class NewsRepositoryImpl(
     }
 
     override suspend fun getEverything(): LiveData<List<Article>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        return withContext(Dispatchers.IO) {
+            initNews()
+            return@withContext newsDao.getArticles(EVERYTHING)
+        }    }
 
     override suspend fun getTopNews(): LiveData<List<Article>> {
         return withContext(Dispatchers.IO) {
             initNews()
-            return@withContext newsDao.getArticles()
+            return@withContext newsDao.getArticles(TOPNEWS)
         }
     }
 

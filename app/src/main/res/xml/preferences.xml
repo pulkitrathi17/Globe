@@ -4,7 +4,7 @@
             android:title="Language and Location Settings">
         <ListPreference
                 android:key="LANGUAGE"
-                android:title="Language"
+                android:title="Language (Search)"
                 android:summary="%s"
                 android:defaultValue="en"
                 android:entries="@array/languageEntries"
@@ -12,7 +12,7 @@
 
         <ListPreference
                 android:key="LOCATION"
-                android:title="Location"
+                android:title="Location (Top News)"
                 android:summary="%s"
                 android:defaultValue="in"
                 android:entries="@array/countryEntries"

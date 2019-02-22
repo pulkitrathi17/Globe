@@ -33,6 +33,8 @@ class GlobeApplication : Application(), KodeinAware {
 
     }
 
+    public val URL ="URL"
+
     val country_list = mapOf<String, String>(
         "Argentina" to "ar",
         "Australia" to "au",
