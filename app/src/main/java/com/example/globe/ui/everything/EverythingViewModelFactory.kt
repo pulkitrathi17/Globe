@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.globe.data.repository.NewsRepository
 
-class HeadlineViewModelFactory(
+class EverythingViewModelFactory(
     private val newsRepository: NewsRepository
+
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HeadlineViewModel(newsRepository) as T
+        return EverythingViewModel(newsRepository) as T
     }
 }

@@ -13,11 +13,11 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE )
     fun upsertArticles(articles: List<Article>)
 
-    @Query("SELECT * FROM article WHERE type = :type ORDER BY publishedAt DESC ")
-    fun getArticles(type: String): LiveData<List<Article>>
+    @Query("SELECT * FROM article ORDER BY publishedAt DESC ")
+    fun getArticles(): LiveData<List<Article>>
 
-    @Query("delete from article where type = :type")
-    fun clearOldNews(type: String)
+    @Query("delete from article")
+    fun clearOldNews()
 
 
 }

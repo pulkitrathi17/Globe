@@ -1,5 +1,6 @@
 package com.example.globe.data.repository
 
+import android.app.DownloadManager
 import androidx.lifecycle.LiveData
 import com.example.globe.data.db.NewsDao
 import com.example.globe.data.db.entity.Article
@@ -15,13 +16,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
-const val TOPNEWS = "topnews"
-const val EVERYTHING = "everything"
-
 class NewsRepositoryImpl(
     private val newsDao: NewsDao,
     private val newsDataSource: NewsDataSource
-):NewsRepository {
+) : NewsRepository {
 
     init {
         newsDataSource.downloadedTopNews.observeForever { newTopNews ->
@@ -29,42 +27,36 @@ class NewsRepositoryImpl(
         }
     }
 
-    override suspend fun getEverything(): LiveData<List<Article>> {
+    override suspend fun getEverything(query: String): LiveData<List<Article>> {
         return withContext(Dispatchers.IO) {
-            initNews()
-            return@withContext newsDao.getArticles(EVERYTHING)
-        }    }
+            fetchEverything(query)
+            return@withContext newsDataSource.downloadedEverything
+        }
+    }
 
     override suspend fun getTopNews(): LiveData<List<Article>> {
         return withContext(Dispatchers.IO) {
-            initNews()
-            return@withContext newsDao.getArticles(TOPNEWS)
+            fetchTopNews()
+            return@withContext newsDao.getArticles()
         }
     }
 
-    private suspend fun initNews() {
-        if (isFetchNewsNeeded()) {
-            fetchTopNews()
-        }
-    }
 
     private suspend fun fetchTopNews() {
         newsDataSource.fetchTopNews()
     }
 
-    private fun isFetchNewsNeeded(): Boolean {
-        return true
+    private suspend fun fetchEverything(query: String) {
+        newsDataSource.fetchEverything(query)
     }
 
-    private fun persistFetchedTopNews(newsResponse: NewsResponse) {
+    private fun persistFetchedTopNews(articleList: List<Article>) {
         GlobalScope.launch(Dispatchers.IO) {
 
             //clear old db
-            newsDao.clearOldNews(TOPNEWS)
+            newsDao.clearOldNews()
 
-            //to add type of request
-            newsResponse.articles.forEach { it-> it.type= TOPNEWS }
-            newsDao.upsertArticles(newsResponse.articles)
+            newsDao.upsertArticles(articleList)
         }
     }
 }

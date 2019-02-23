@@ -9,6 +9,7 @@ import com.example.globe.data.network.NewsDataSourceImpl
 import com.example.globe.data.provider.SettingPreferences
 import com.example.globe.data.repository.NewsRepository
 import com.example.globe.data.repository.NewsRepositoryImpl
+import com.example.globe.ui.headlines.EverythingViewModelFactory
 import com.example.globe.ui.headlines.HeadlineViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -27,9 +28,10 @@ class GlobeApplication : Application(), KodeinAware {
         bind() from provider { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { Api(instance()) }
         bind<NewsDataSource>() with singleton { NewsDataSourceImpl(instance()) }
-        bind() from singleton { NewsRepositoryImpl(instance(), instance()) }
-        //bind<NewsRepository>() with singleton { NewsRepositoryImpl(instance(), instance()) }
+        //bind() from singleton { NewsRepositoryImpl(instance(), instance()) }
+        bind<NewsRepository>() with singleton { NewsRepositoryImpl(instance(), instance()) }
         bind() from provider { HeadlineViewModelFactory(instance()) }
+        bind() from provider { EverythingViewModelFactory(instance()) }
 
     }
 

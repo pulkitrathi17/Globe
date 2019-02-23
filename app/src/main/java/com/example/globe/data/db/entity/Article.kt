@@ -26,8 +26,7 @@ class Article(
     @SerializedName("publishedAt")
     var publishedAt: String? = null,
     @SerializedName("content")
-    var content: String? = null,
+    var content: String? = null
 
-    var type: String? = null
 
 )

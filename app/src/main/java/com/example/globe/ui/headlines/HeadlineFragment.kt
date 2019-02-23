@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.globe.GlobeApplication
 
 import com.example.globe.R
 import com.example.globe.data.db.entity.Article
@@ -40,7 +38,7 @@ class HeadlineFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(HeadlineViewModel::class.java)
 
-       toolbar.title = "Headline"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Headline"
 
         buildUI()
 

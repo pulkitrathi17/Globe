@@ -1,4 +1,4 @@
-package com.example.globe.ui.headlines
+package com.example.globe.ui.everything
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,8 @@ import com.example.globe.data.db.entity.Article
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_news.view.*
 
-class HeadlineRecyclerAdapter(private val newsList: List<Article>, private val clickListener: (Article) -> Unit) :
+
+class EverythingRecyclerAdapter(private val newsList: List<Article>, private val clickListener: (Article) -> Unit) :
     RecyclerView.Adapter<NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
