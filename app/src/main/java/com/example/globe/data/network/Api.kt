@@ -1,5 +1,6 @@
 package com.example.globe.data.network
 
+import com.example.globe.BuildConfig
 import com.example.globe.data.network.response.NewsResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -10,8 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
-const val API_KEY ="70411829ddc74c02a560e76cca559238"
 const val BASE_URL = "https://newsapi.org/v2/"
 
 interface Api {
@@ -32,7 +31,7 @@ interface Api {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("apiKey", API_KEY)
+                    .addQueryParameter("apiKey", BuildConfig.API_KEY)
                     .build()
                 val request = chain.request()
                     .newBuilder()
