@@ -7,9 +7,6 @@ import com.example.globe.data.db.entity.Article
 import com.example.globe.data.db.entity.News
 import com.example.globe.data.network.ConnectivityInterceptorImpl
 import com.example.globe.data.network.NewsDataSource
-import com.example.globe.data.network.NewsDataSourceImpl
-import com.example.globe.data.network.response.NewsResponse
-import com.example.globe.data.provider.SettingPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
